@@ -1,4 +1,7 @@
-package model;
+package lesClasses;
+
+
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,9 +9,9 @@ import java.util.Collections;
 /**
  * Classe représentant un étudiant FISA
  */
-public class FISA extends Etudiant {
+public class FISA extends Etudiants {
     private int rang;
-    private ArrayList<Dominante> listeDominantes;
+    private ArrayList<Dominantes> listeDominantes;
 
     public FISA(String nom, String prenom, String filiere, int promo, String dateNaissance,
                 String username, String password, int rang) {
@@ -25,14 +28,14 @@ public class FISA extends Etudiant {
         this.rang = rang;
     }
 
-    public ArrayList<Dominante> getListeDominantes() {
+    public ArrayList<Dominantes> getListeDominantes() {
         return listeDominantes;
     }
 
     /**
      * Ajoute une dominante si disponible et si < 5 choisies
      */
-    public boolean ajouterDominante(Dominante d) {
+    public boolean ajouterDominante(Dominantes d) {
         if (listeDominantes.size() >= 5) return false;
         if (!d.aDesPlacesDisponibles()) return false;
 
@@ -44,8 +47,9 @@ public class FISA extends Etudiant {
     /**
      * Trie les dominantes par ordre alphabétique（可以替换为别的排序标准）
      */
-    public ArrayList<Dominante> classerLesDominantes() {
+    public ArrayList<Dominantes> classerLesDominantes() {
         Collections.sort(listeDominantes, (d1, d2) -> d1.getNom().compareToIgnoreCase(d2.getNom()));
         return listeDominantes;
     }
+
 }
