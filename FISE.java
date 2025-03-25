@@ -1,15 +1,29 @@
-package model;
+package lesClasses;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Scanner;
 
 /**
  * Classe représentant un étudiant FISE
+ * @author groupe7_4
+ * @version 1.0
  */
-public class FISE extends Etudiant {
+public class FISE extends Etudiants {
     private int rang;
-    private ArrayList<Dominante> listeDominantes;
+    private ArrayList<Dominantes> listeDominantes;
 
+    /**
+     * Constructeur
+     * @param nom
+     * @param prenom
+     * @param filiere
+     * @param promo
+     * @param dateNaissance
+     * @param username
+     * @param password
+     * @param rang
+     */
+   
     public FISE(String nom, String prenom, String filiere, int promo, String dateNaissance,
                 String username, String password, int rang) {
         super(nom, prenom, filiere, promo, dateNaissance, username, password);
@@ -26,29 +40,26 @@ public class FISE extends Etudiant {
     }
 
     /**
-     * Retourne la liste des dominantes sélectionnées
+     * Retourne la liste de toutes les dominantes 
      */
-    public ArrayList<Dominante> getListeDominantes() {
+    public ArrayList<Dominantes> getListeDominantes() {
         return listeDominantes;
     }
 
     /**
-     * Ajoute une dominante à la liste si elle est disponible et si l'étudiant n'a pas déjà 5 dominantes
+     * Méthode permettant au FISE de classer ses 5 dominantes préférées
      */
-    public boolean ajouterDominante(Dominante d) {
-        if (listeDominantes.size() >= 5) return false;
-        if (!d.aDesPlacesDisponibles()) return false;
+    public void classerDominantes() {
+        ArrayList<Dominantes> dominantesDisponibles = recupererDominantes();
+        ArrayList<Dominantes> choixEtudiant = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
 
-        listeDominantes.add(d);
-        d.addEtudiant(this); // Met à jour la dominante aussi
-        return true;
-    }
+        if (dominantesDisponibles.isEmpty()) {
+            System.out.println("Aucune dominante disponible.");
+            return;
+        }
 
-    /**
-     * Trie les dominantes par nom（可以改成别的规则）
-     */
-    public ArrayList<Dominante> classerLesDominantes() {
-        Collections.sort(listeDominantes, (d1, d2) -> d1.getNom().compareToIgnoreCase(d2.getNom()));
-        return listeDominantes;
-    }
+    
+    
 }
+
